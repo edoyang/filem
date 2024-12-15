@@ -2,6 +2,8 @@ import { Link, Route, Routes } from "react-router";
 import "./App.css";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (
