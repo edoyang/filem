@@ -5,14 +5,13 @@ import Slider from "react-slick";
 
 const Hero = () => {
   const [movies, setMovies] = useState([]);
+  const [movieDetails, setMovieDetails] = useState({});
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const topRatedMovies = movies
-    .sort((a, b) => b.vote_average - a.vote_average)
-    .slice(0, 5);
 
   const settings = {
     dots: false,
+    arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -24,7 +23,78 @@ const Hero = () => {
     tmdbApi
       .get("/movie/popular")
       .then((response) => {
-        setMovies(response.data.results);
+        const moviesData = response.data.results;
+
+        const topMovieIds = moviesData.map((movie) => movie.id);
+
+        Promise.all(
+          topMovieIds.map((id) =>
+            Promise.all([
+              tmdbApi.get(`/movie/${id}`).then((res) => ({
+                id,
+                details: res.data,
+              })),
+              tmdbApi.get(`/movie/${id}/credits`).then((res) => ({
+                id,
+                credits: res.data,
+              })),
+              tmdbApi.get(`/movie/${id}/watch/providers`).then((res) => ({
+                id,
+                providers: res.data.results,
+              })),
+            ])
+          )
+        )
+          .then((results) => {
+            const filteredMovies = [];
+            const detailsMap = {};
+
+            results.forEach(
+              ([detailsResult, creditsResult, providersResult]) => {
+                const { id, details } = detailsResult;
+                const { credits } = creditsResult;
+                const { providers } = providersResult;
+
+                const watchProviders = providers?.AU?.flatrate || [];
+                if (watchProviders.length > 0) {
+                  filteredMovies.push(details);
+
+                  const director = credits.crew.find(
+                    (person) => person.job === "Director"
+                  );
+                  const cast = credits.cast
+                    .slice(0, 5)
+                    .map((actor) => actor.name);
+
+                  const providerNames = watchProviders.map(
+                    (provider) => provider.provider_name
+                  );
+
+                  detailsMap[id] = {
+                    genres:
+                      details.genres
+                        .slice(0, 2)
+                        .map((genre) => genre.name)
+                        .join(", ") || "Unknown",
+                    year: details.release_date.split("-")[0],
+                    duration: `${Math.floor(details.runtime / 60)}h ${
+                      details.runtime % 60
+                    }m`,
+                    director: director ? director.name : "Unknown",
+                    cast:
+                      cast.length > 0 ? cast.join(", ") : "No cast available",
+                    watchProviders: providerNames.join(", "),
+                  };
+                }
+              }
+            );
+            setMovies(filteredMovies);
+            setMovieDetails(detailsMap);
+          })
+          .catch((detailsError) => {
+            console.error("Error fetching movie details:", detailsError);
+            setError(detailsError.message);
+          });
       })
       .catch((error) => {
         console.error("Error fetching movies:", error);
@@ -39,26 +109,39 @@ const Hero = () => {
       ) : (
         <div className="slider-container">
           <Slider {...settings}>
-            {topRatedMovies.map((movie, index) => (
+            {movies.map((movie, index) => (
               <div
                 className="movie"
                 key={movie.id}
                 aria-hidden={index !== currentSlide}
                 tabIndex={index === currentSlide ? "0" : "-1"}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`}
+                  src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                   alt={`${movie.title} cover`}
                   className="cover"
                 />
                 <div className="movie-footer">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={`${movie.title} poster`}
-                    className="poster"
-                  />
-                  <div className="movie-info">
-                    <h3>{movie.title}</h3>
-                    <p>{movie.overview}</p>
+                  <h3 className="movie-title">{movie.title}</h3>
+                  <span className="movie-info">
+                    <p>{movieDetails[movie.id]?.genres}</p> |{" "}
+                    <p>{movieDetails[movie.id]?.year}</p> |{" "}
+                    <p>{movieDetails[movie.id]?.duration}</p>
+                  </span>
+                  <p className="movie-overview">{movie.overview}</p>
+                  <div className="movie-credits">
+                    <p>
+                      <strong>Director:</strong>{" "}
+                      {movieDetails[movie.id]?.director}
+                    </p>
+                    <p>
+                      <strong>Cast:</strong> {movieDetails[movie.id]?.cast}
+                    </p>
+                  </div>
+                  <div className="where-to-watch">
+                    <p>
+                      <strong>Where to Watch:</strong>{" "}
+                      {movieDetails[movie.id]?.watchProviders}
+                    </p>
                   </div>
                 </div>
               </div>
