@@ -36,11 +36,13 @@
             aspect-ratio: 2 / 1;
             max-height: 75vh;
             overflow: hidden;
+            min-height: var(--hero-height);
+            cursor: pointer;
 
             .cover {
               position: absolute;
-              width: 100%;
-              height: auto;
+              height: 100%;
+              width: auto;
               object-fit: cover;
               top: 50%;
               left: 50%;
@@ -72,6 +74,7 @@
               display: flex;
               flex-direction: column;
               gap: 1rem;
+              min-height: max-content;
 
               span.movie-info {
                 display: flex;
@@ -81,8 +84,9 @@
               }
 
               .movie-title {
+                min-height: max-content;
                 color: white;
-                max-width: 75%;
+                max-width: 100%;
                 line-clamp: 2;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -110,10 +114,25 @@
                   font: var(--small-text);
                 }
               }
+
+              .provider-logos {
+                display: flex;
+                gap: 1rem;
+
+                > img {
+                  width: 50px;
+                  height: 50px;
+                }
+              }
             }
           }
         }
       }
     }
   }
+}
+
+// responsive styles
+
+@media screen and (max-width: 768px) {
 }

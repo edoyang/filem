@@ -14,12 +14,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  --headline: normal 80px "Anton", sans-serif;
-  --medium: bolder 40px/25.3 "Work Sans", sans-serif;
-  --section-title: normal 20px/22px "Work Sans", sans-serif;
-  --paragraph: 200 15px/26px "Work Sans", sans-serif;
-  --small_text: normal 12px/24px "Work Sans", sans-serif;
 }
 
 html,

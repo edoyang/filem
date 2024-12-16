@@ -1,0 +1,33 @@
+:root {
+  /* Desktop Styles */
+  --headline: normal 80px "Anton", sans-serif;
+  --medium-headline: bolder 40px/25.3px "Work Sans", sans-serif;
+  --section-title: normal 20px/22px "Work Sans", sans-serif;
+  --paragraph: 200 15px/26px "Work Sans", sans-serif;
+  --small-text: normal 12px/24px "Work Sans", sans-serif;
+  --hero-height: 750px;
+}
+
+@media (max-width: 768px) {
+  /* Tablet Styles */
+  :root {
+    --headline: normal 50px/73.4px "Anton", sans-serif;
+    --medium-headline: bolder 30px/25.3px "Work Sans", sans-serif;
+    --section-title: normal 17px/22px "Work Sans", sans-serif;
+    --paragraph: 200 11px/22px "Work Sans", sans-serif;
+    --small-text: normal 10px/19px "Work Sans", sans-serif;
+    --hero-height: 500px;
+  }
+}
+
+@media (max-width: 500px) {
+  /* Mobile Styles */
+  :root {
+    --headline: normal 40px "Anton", sans-serif;
+    --medium-headline: bolder 25px/25.3px "Work Sans", sans-serif;
+    --section-title: normal 16px/22px "Work Sans", sans-serif;
+    --paragraph: 200 10px/18px "Work Sans", sans-serif;
+    --small-text: normal 8px/15px "Work Sans", sans-serif;
+    --hero-height: 450px;
+  }
+}

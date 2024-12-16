@@ -66,9 +66,17 @@ const Hero = () => {
                     .slice(0, 5)
                     .map((actor) => actor.name);
 
-                  const providerNames = watchProviders.map(
-                    (provider) => provider.provider_name
-                  );
+                  const providerLogos = watchProviders
+                    .map(
+                      (provider) =>
+                        `<img 
+                          src="https://image.tmdb.org/t/p/original${provider.logo_path}" 
+                          alt="${provider.provider_name}" 
+                          title="${provider.provider_name}" 
+                          class="provider-logo" 
+                        />`
+                    )
+                    .join("");
 
                   detailsMap[id] = {
                     genres:
@@ -83,7 +91,7 @@ const Hero = () => {
                     director: director ? director.name : "Unknown",
                     cast:
                       cast.length > 0 ? cast.join(", ") : "No cast available",
-                    watchProviders: providerNames.join(", "),
+                    watchProviders: providerLogos,
                   };
                 }
               }
@@ -139,9 +147,14 @@ const Hero = () => {
                   </div>
                   <div className="where-to-watch">
                     <p>
-                      <strong>Where to Watch:</strong>{" "}
-                      {movieDetails[movie.id]?.watchProviders}
+                      <strong>Where to Watch:</strong>
                     </p>
+                    <div
+                      className="provider-logos"
+                      dangerouslySetInnerHTML={{
+                        __html: movieDetails[movie.id]?.watchProviders,
+                      }}
+                    />
                   </div>
                 </div>
               </div>

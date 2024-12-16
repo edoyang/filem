@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from "react-router";
 import "./App.css";
+import "./Responsive.css";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import "slick-carousel/slick/slick.css";
