@@ -123,11 +123,12 @@ const Hero = () => {
                 key={movie.id}
                 aria-hidden={index !== currentSlide}
                 tabIndex={index === currentSlide ? "0" : "-1"}>
-                <img
-                  src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                  alt={`${movie.title} cover`}
-                  className="cover"
-                />
+                <div className="cover">
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                    alt={`${movie.title} cover`}
+                  />
+                </div>
                 <div className="movie-footer">
                   <h3 className="movie-title">{movie.title}</h3>
                   <span className="movie-info">
