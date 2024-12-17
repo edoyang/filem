@@ -133,18 +133,21 @@
               aspect-ratio: 1/1;
               max-height: 100vh;
               min-height: 100vh;
+              display: flex !important;
+              flex-direction: column;
 
               .cover {
                 position: relative;
                 align-self: flex-start;
                 width: 100%;
-                height: 50%;
+                flex: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;
               }
 
               .movie-footer {
+                flex: 1;
                 background-color: black;
                 min-height: 50vh;
               }
