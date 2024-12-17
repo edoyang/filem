@@ -23,6 +23,7 @@
         width: 100vw;
         max-height: max-content;
         overflow: hidden;
+        height: max-content;
 
         *:focus,
         *:focus-visible {
@@ -33,24 +34,20 @@
           .movie {
             position: relative;
             width: 100vw;
-            aspect-ratio: 2 / 1;
-            max-height: 75vh;
-            overflow: hidden;
+            max-height: 100vh;
             min-height: var(--hero-height);
-            cursor: pointer;
 
             .cover {
+              overflow: hidden;
               position: absolute;
               width: 100%;
-              height: auto;
-              top: 50%;
-              left: 50%;
+              height: 100%;
               z-index: -2;
-              transform: translate(-50%, -50%);
 
               > img {
                 width: 100%;
-                height: auto;
+                height: 100%;
+
                 object-fit: cover;
                 z-index: -2;
               }
@@ -93,10 +90,10 @@
                 min-height: max-content;
                 color: white;
                 max-width: 100%;
-                line-clamp: 2;
+                line-clamp: var(--headline-line-clamp);
                 overflow: hidden;
                 text-overflow: ellipsis;
-                -webkit-line-clamp: 2;
+                -webkit-line-clamp: var(--headline-line-clamp);
                 -webkit-box-orient: vertical;
                 display: -webkit-box;
                 font: var(--headline);
@@ -106,12 +103,13 @@
                 font: var(--paragraph);
                 color: white;
                 max-width: 60%;
-                line-clamp: 4;
+                line-clamp: var(--paragraph-line-clamp);
                 overflow: hidden;
                 text-overflow: ellipsis;
-                -webkit-line-clamp: 4;
+                -webkit-line-clamp: var(--paragraph-line-clamp);
                 -webkit-box-orient: vertical;
                 display: -webkit-box;
+                height: var(--paragraph-height);
               }
 
               .movie-credits {
@@ -134,16 +132,16 @@
             @media screen and (max-width: 500px) {
               aspect-ratio: 1/1;
               max-height: 100vh;
-              min-height: 75vh;
+              min-height: 100vh;
 
               .cover {
                 position: relative;
                 align-self: flex-start;
                 width: 100%;
-                height: auto;
-                top: 0;
-                left: 0;
-                transform: none;
+                height: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
               }
 
               .movie-footer {
