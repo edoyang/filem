@@ -1,6 +1,7 @@
 .hero {
   display: flex;
   position: relative;
+  min-height: var(--hero-height);
 
   > .slider-container {
     .slick-slider {
@@ -144,6 +145,17 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                &::before {
+                  background: linear-gradient(
+                    to right,
+                    rgba(0, 0, 0, 0.75) 0%,
+                    rgba(0, 0, 0, 0.6) 25%,
+                    rgba(0, 0, 0, 0.4) 50%,
+                    rgba(0, 0, 0, 0.6) 75%,
+                    rgba(0, 0, 0, 0.75) 100%
+                  );
+                }
               }
 
               .movie-footer {
