@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import "./card.css";
 
-const Card = () => {
+const Card = ({ src, alt }) => {
+  const [isError, setIsError] = useState(false);
+
   return (
-    <div className="image-container">
-      <img
-        src="https://image.tmdb.org/t/p/w500/8bRIfStfY6TgZAFA8G1LHZp3fJJ.jpg"
-        alt="movie"
-      />
+    <div className="card">
+      <div className="image-container">
+        {!isError && (
+          <img
+            src={src ? `https://image.tmdb.org/t/p/original/${src}` : ""}
+            alt={alt}
+            onError={() => setIsError(true)} // Mark as error when image fails
+          />
+        )}
+        {isError && <p className="alt-text">{alt}</p>}
+      </div>
     </div>
   );
 };

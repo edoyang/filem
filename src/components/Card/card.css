@@ -1,0 +1,31 @@
+.card {
+  width: var(--card-width);
+  height: var(--card-height);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card .image-container {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background-color: gray;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.image-container .alt-text {
+  padding: 0.25rem;
+  text-align: center;
+  font: var(--section-title);
+  height: max-content;
+}

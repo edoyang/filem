@@ -1,0 +1,18 @@
+.movies-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-left: var(--global-padding);
+
+  > h1 {
+    font: var(--section-title);
+  }
+  .slick-slider {
+    .slick-list {
+      .slick-track {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+}

@@ -1,21 +1,36 @@
 import tmdbApi from "../config/tmdb";
 
+// Fetch popular movies
 export const fetchPopularMovies = async () => {
   const response = await tmdbApi.get("/movie/popular");
   return response.data.results.map((movie) => movie.id);
 };
 
+// Fetch upcoming movies
 export const fetchUpcomingMovies = async () => {
   const response = await tmdbApi.get("/movie/upcoming");
   return response.data.results.map((movie) => movie.id);
 };
 
+// Fetch now playing movies
 export const fetchNowPlayingMovies = async () => {
   const response = await tmdbApi.get("/movie/now_playing");
   return response.data.results.map((movie) => movie.id);
 };
 
-// Fetch movie details, credits, providers and transform them
+// Fetch recently added movies
+export const fetchRecentlyAddedMovies = async () => {
+  const response = await tmdbApi.get("/discover/movie", {
+    params: {
+      sort_by: "release_date.desc",
+      release_date_lte: new Date().toISOString().split("T")[0],
+    },
+  });
+
+  return response.data.results.map((movie) => movie.id);
+};
+
+// Fetch movie details, credits, and providers
 export const fetchMovieDetails = async (id) => {
   const [details, credits, providers] = await Promise.all([
     tmdbApi.get(`/movie/${id}`),
@@ -23,7 +38,6 @@ export const fetchMovieDetails = async (id) => {
     tmdbApi.get(`/movie/${id}/watch/providers`),
   ]);
 
-  // Combine and transform data
   const director = credits.data.crew.find(
     (person) => person.job === "Director"
   );
@@ -40,7 +54,7 @@ export const fetchMovieDetails = async (id) => {
     .join("");
 
   return {
-    id: id,
+    id,
     title: details.data.title,
     genres:
       details.data.genres
@@ -56,6 +70,7 @@ export const fetchMovieDetails = async (id) => {
     cast: cast.length > 0 ? cast.join(", ") : "No cast available",
     watchProviders: providerLogos || "No providers available",
     backdropPath: details.data.backdrop_path,
+    posterPath: details.data.poster_path,
   };
 };
 
@@ -83,17 +98,20 @@ const fetchMoviesByGenre = async (genreId) => {
   return response.data.results.map((movie) => movie.id);
 };
 
-export const Action = async () => fetchMoviesByGenre(GENRE_IDS.Action);
-export const Adventure = async () => fetchMoviesByGenre(GENRE_IDS.Adventure);
-export const Animation = async () => fetchMoviesByGenre(GENRE_IDS.Animation);
-export const Comedy = async () => fetchMoviesByGenre(GENRE_IDS.Comedy);
-export const Crime = async () => fetchMoviesByGenre(GENRE_IDS.Crime);
-export const Documentary = async () =>
-  fetchMoviesByGenre(GENRE_IDS.Documentary);
-export const Drama = async () => fetchMoviesByGenre(GENRE_IDS.Drama);
-export const Fantasy = async () => fetchMoviesByGenre(GENRE_IDS.Fantasy);
-export const Horror = async () => fetchMoviesByGenre(GENRE_IDS.Horror);
-export const Romance = async () => fetchMoviesByGenre(GENRE_IDS.Romance);
-export const Science = async () => fetchMoviesByGenre(GENRE_IDS.ScienceFiction);
-export const Thriller = async () => fetchMoviesByGenre(GENRE_IDS.Thriller);
-export const War = async () => fetchMoviesByGenre(GENRE_IDS.War);
+// Group genre fetchers into an object
+export const genres = {
+  Action: () => fetchMoviesByGenre(GENRE_IDS.Action),
+  Adventure: () => fetchMoviesByGenre(GENRE_IDS.Adventure),
+  Animation: () => fetchMoviesByGenre(GENRE_IDS.Animation),
+  Comedy: () => fetchMoviesByGenre(GENRE_IDS.Comedy),
+  Crime: () => fetchMoviesByGenre(GENRE_IDS.Crime),
+  Documentary: () => fetchMoviesByGenre(GENRE_IDS.Documentary),
+  Drama: () => fetchMoviesByGenre(GENRE_IDS.Drama),
+  Fantasy: () => fetchMoviesByGenre(GENRE_IDS.Fantasy),
+  Horror: () => fetchMoviesByGenre(GENRE_IDS.Horror),
+  Romance: () => fetchMoviesByGenre(GENRE_IDS.Romance),
+  ScienceFiction: () => fetchMoviesByGenre(GENRE_IDS.ScienceFiction),
+  Thriller: () => fetchMoviesByGenre(GENRE_IDS.Thriller),
+  War: () => fetchMoviesByGenre(GENRE_IDS.War),
+  RecentlyAdded: fetchRecentlyAddedMovies,
+};
