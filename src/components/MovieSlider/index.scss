@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 2rem;
   padding-left: var(--global-padding);
+  min-height: var(--card-height);
 
   > h1 {
     font: var(--section-title);

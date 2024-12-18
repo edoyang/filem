@@ -7,8 +7,8 @@ const Home = () => {
   return (
     <div>
       <Hero />
+      <MovieSlider />
       <MovieSlider genre={genres.Horror} />
-      <MovieSlider genre={genres.RecentlyAdded} />
       <MovieSlider genre={genres.Action} />
     </div>
   );
