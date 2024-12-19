@@ -5,6 +5,7 @@
   --section-title: normal 20px/22px "Work Sans", sans-serif;
   --paragraph: 200 15px/26px "Work Sans", sans-serif;
   --small-text: normal 12px/24px "Work Sans", sans-serif;
+  --cast-text: bold 19px/22px "Work Sans", sans-serif;
   --hero-height: 80vh;
   --headline-line-clamp: 1;
   --paragraph-line-clamp: 3;
@@ -12,6 +13,14 @@
   --card-width: 190px;
   --card-height: 300px;
   --global-padding: 2rem;
+  --backdrop: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.85) 25%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.85) 75%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 @media (max-width: 850px) {
@@ -22,12 +31,21 @@
     --section-title: normal 17px/22px "Work Sans", sans-serif;
     --paragraph: 200 11px/22px "Work Sans", sans-serif;
     --small-text: normal 10px/19px "Work Sans", sans-serif;
+    --cast-text: bold 16px/22px "Work Sans", sans-serif;
     --hero-height: 400px;
     --headline-line-clamp: 1;
     --paragraph-line-clamp: 3;
     --paragraph-height: 66px;
     --card-width: 150px;
     --card-height: 210px;
+    --backdrop: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.6) 25%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.6) 75%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
   }
 }
 
@@ -39,6 +57,7 @@
     --section-title: normal 16px/22px "Work Sans", sans-serif;
     --paragraph: 200 10px/18px "Work Sans", sans-serif;
     --small-text: normal 8px/15px "Work Sans", sans-serif;
+    --cast-text: bold 15px/22px "Work Sans", sans-serif;
     --hero-height: 100vh;
     --headline-line-clamp: 2;
     --paragraph-line-clamp: 4;

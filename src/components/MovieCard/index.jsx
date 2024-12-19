@@ -1,3 +1,5 @@
+import "./style.scss";
+
 const MovieCard = ({ movie, currentSlide }) => {
   return (
     <div

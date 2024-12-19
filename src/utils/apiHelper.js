@@ -18,18 +18,6 @@ export const fetchNowPlayingMovies = async () => {
   return response.data.results.map((movie) => movie.id);
 };
 
-// Fetch recently added movies
-export const fetchRecentlyAddedMovies = async () => {
-  const response = await tmdbApi.get("/discover/movie", {
-    params: {
-      sort_by: "release_date.desc",
-      release_date_lte: new Date().toISOString().split("T")[0],
-    },
-  });
-
-  return response.data.results.map((movie) => movie.id);
-};
-
 // Fetch movie details, credits, and providers
 export const fetchMovieDetails = async (id) => {
   const [details, credits, providers] = await Promise.all([
@@ -113,5 +101,4 @@ export const genres = {
   ScienceFiction: () => fetchMoviesByGenre(GENRE_IDS.ScienceFiction),
   Thriller: () => fetchMoviesByGenre(GENRE_IDS.Thriller),
   War: () => fetchMoviesByGenre(GENRE_IDS.War),
-  RecentlyAdded: fetchRecentlyAddedMovies,
 };

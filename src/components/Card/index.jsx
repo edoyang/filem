@@ -12,6 +12,7 @@ const Card = ({ src, alt }) => {
             src={src ? `https://image.tmdb.org/t/p/original/${src}` : ""}
             alt={alt}
             onError={() => setIsError(true)} // Mark as error when image fails
+            lazy="true"
           />
         )}
         {isError && <p className="alt-text">{alt}</p>}

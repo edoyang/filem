@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { fetchPopularMovies, fetchMovieDetails } from "../../utils/apiHelper";
 import MovieCard from "../MovieCard";
-import "./hero.scss";
+import { useNavigate } from "react-router";
+import "./style.scss";
 
 const Hero = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+  const [isClickAllowed, setIsClickAllowed] = useState(true);
+  const navigate = useNavigate();
 
   const settings = {
     dots: false,
@@ -22,13 +26,9 @@ const Hero = () => {
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        // Fetch popular movie IDs
         const movieIds = await fetchPopularMovies();
-
-        // Fetch and transform movie details
         const movieDetailsPromises = movieIds.map(fetchMovieDetails);
         const fullMovieData = await Promise.all(movieDetailsPromises);
-
         setMovies(fullMovieData);
         // AUSTRALIA ONLY
         // const filteredMovies = fullMovieData.filter(
@@ -44,6 +44,25 @@ const Hero = () => {
     loadMovies();
   }, []);
 
+  const handleMouseDown = (event) => {
+    setStartPos({ x: event.clientX, y: event.clientY });
+    setIsClickAllowed(true); // Reset click allowance
+  };
+
+  const handleMouseMove = (event) => {
+    const moveX = Math.abs(event.clientX - startPos.x);
+    const moveY = Math.abs(event.clientY - startPos.y);
+    if (moveX > 10 || moveY > 10) {
+      setIsClickAllowed(false); // Disallow click if movement exceeds threshold
+    }
+  };
+
+  const handleMouseUp = (event, id) => {
+    if (isClickAllowed) {
+      navigate(`/movie/${id}`); // Navigate to the movie page
+    }
+  };
+
   return (
     <div className="hero">
       {error ? (
@@ -52,11 +71,17 @@ const Hero = () => {
         <div className="slider-container">
           <Slider {...settings}>
             {movies.map((movie, index) => (
-              <MovieCard
+              <div
                 key={movie.id}
-                movie={movie}
-                currentSlide={index === currentSlide}
-              />
+                draggable="false"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={(event) => handleMouseUp(event, movie.id)}>
+                <MovieCard
+                  movie={movie}
+                  currentSlide={index === currentSlide}
+                />
+              </div>
             ))}
           </Slider>
         </div>

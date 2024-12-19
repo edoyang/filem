@@ -14,7 +14,6 @@ const genreFetchers = {
   "It's time for Science!": genres.ScienceFiction,
   "Feel the Thrill": genres.Thriller,
   "War Movies": genres.War,
-  "Recently Added": genres.RecentlyAdded,
 };
 
 export default genreFetchers;

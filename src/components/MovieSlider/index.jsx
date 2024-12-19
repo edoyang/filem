@@ -2,20 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
 import Card from "../Card";
 import genreFetchers from "../../utils/genreFetchers";
-import {
-  fetchMovieDetails,
-  fetchRecentlyAddedMovies,
-} from "../../utils/apiHelper";
-import "./index.scss";
+import { fetchMovieDetails, fetchUpcomingMovies } from "../../utils/apiHelper";
+import useDraggableLink from "../../utils/useDraggableLink";
+import "./style.scss";
 
-const MovieSlider = ({ genre = fetchRecentlyAddedMovies }) => {
+const MovieSlider = ({ genre = fetchUpcomingMovies }) => {
   const [movies, setMovies] = useState([]);
   const sliderRef = useRef(null);
+  const { onMouseDown, onMouseMove, onMouseUp } = useDraggableLink();
 
-  // Find the title dynamically based on the genre function
   const genreTitle =
     Object.keys(genreFetchers).find((key) => genreFetchers[key] === genre) ||
-    "Recently Added";
+    "Upcoming Movies";
 
   const settings = {
     dots: false,
@@ -54,7 +52,7 @@ const MovieSlider = ({ genre = fetchRecentlyAddedMovies }) => {
           const details = await fetchMovieDetails(id);
           return {
             id,
-            src: `https://image.tmdb.org/t/p/original/${details.posterPath}`,
+            src: `https://image.tmdb.org/t/p/w342/${details.posterPath}`,
             alt: details.title,
           };
         });
@@ -74,7 +72,14 @@ const MovieSlider = ({ genre = fetchRecentlyAddedMovies }) => {
       <h1>{genreTitle}</h1>
       <Slider {...settings}>
         {movies.map((movie) => (
-          <Card key={movie.id} src={movie.src} alt={movie.alt} />
+          <div
+            key={movie.id}
+            draggable="false"
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={() => onMouseUp(movie.id)}>
+            <Card src={movie.src} alt={movie.alt} />
+          </div>
         ))}
       </Slider>
     </div>
