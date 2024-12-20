@@ -6,6 +6,7 @@
   --paragraph: 200 15px/26px "Work Sans", sans-serif;
   --small-text: normal 12px/24px "Work Sans", sans-serif;
   --cast-text: bold 19px/22px "Work Sans", sans-serif;
+  --logo: normal 40px "Bebas Neue", sans-serif;
   --hero-height: 80vh;
   --headline-line-clamp: 1;
   --paragraph-line-clamp: 3;
@@ -32,6 +33,7 @@
     --paragraph: 200 11px/22px "Work Sans", sans-serif;
     --small-text: normal 10px/19px "Work Sans", sans-serif;
     --cast-text: bold 16px/22px "Work Sans", sans-serif;
+    --logo: normal 30px "Bebas Neue", sans-serif;
     --hero-height: 400px;
     --headline-line-clamp: 1;
     --paragraph-line-clamp: 3;
@@ -58,6 +60,7 @@
     --paragraph: 200 10px/18px "Work Sans", sans-serif;
     --small-text: normal 8px/15px "Work Sans", sans-serif;
     --cast-text: bold 15px/22px "Work Sans", sans-serif;
+    --logo: normal 20px "Bebas Neue", sans-serif;
     --hero-height: 100vh;
     --headline-line-clamp: 2;
     --paragraph-line-clamp: 4;
