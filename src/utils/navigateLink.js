@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 
-const useDraggableLink = (threshold = 10) => {
+const useNavigateLink = (threshold = 10) => {
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
   const [isClickAllowed, setIsClickAllowed] = useState(true);
-  const navigate = useNavigate();
 
-  const onMouseDown = (event) => {
+  const handleMouseDown = (event) => {
     setStartPos({ x: event.clientX, y: event.clientY });
     setIsClickAllowed(true); // Reset click allowance
   };
 
-  const onMouseMove = (event) => {
+  const handleMouseMove = (event) => {
     const moveX = Math.abs(event.clientX - startPos.x);
     const moveY = Math.abs(event.clientY - startPos.y);
     if (moveX > threshold || moveY > threshold) {
@@ -19,13 +17,13 @@ const useDraggableLink = (threshold = 10) => {
     }
   };
 
-  const onMouseUp = (id) => {
+  const handleMouseUp = (navigateFn, id) => {
     if (isClickAllowed) {
-      navigate(`/movie/${id}`);
+      navigateFn(`/movie/${id}`); // Navigate to the movie page
     }
   };
 
-  return { onMouseDown, onMouseMove, onMouseUp };
+  return { handleMouseDown, handleMouseMove, handleMouseUp };
 };
 
-export default useDraggableLink;
+export default useNavigateLink;

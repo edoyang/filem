@@ -3,44 +3,36 @@ import Slider from "react-slick";
 import Card from "../Card";
 import genreFetchers from "../../utils/genreFetchers";
 import { fetchMovieDetails, fetchUpcomingMovies } from "../../utils/apiHelper";
-import useDraggableLink from "../../utils/useDraggableLink";
+import { useNavigate } from "react-router";
+import useNavigateLink from "../../utils/navigateLink"; // Import reusable hook
 import "./style.scss";
 
 const MovieSlider = ({ genre = fetchUpcomingMovies }) => {
   const [movies, setMovies] = useState([]);
   const sliderRef = useRef(null);
-  const { onMouseDown, onMouseMove, onMouseUp } = useDraggableLink();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate(); // Use navigate for navigation
+  const { handleMouseDown, handleMouseMove, handleMouseUp } = useNavigateLink(); // Use hook
 
   const genreTitle =
     Object.keys(genreFetchers).find((key) => genreFetchers[key] === genre) ||
     "Upcoming Movies";
 
   const settings = {
+    className: "slider variable-width",
     dots: false,
     arrows: false,
     infinite: true,
-    slidesToShow: 1,
+    variableWidth: true, // Enable variableWidth
+    slidesToShow: 1, // Let variableWidth determine visible slides
     swipeToSlide: true,
-    variableWidth: true,
-    afterChange: (current) => {
-      const slides = sliderRef.current.querySelectorAll(".slick-slide");
-      slides.forEach((slide, index) => {
-        if (index === current) {
-          slide.setAttribute("aria-hidden", "false");
-          slide.tabIndex = 0;
-          slide.focus();
-        } else {
-          slide.setAttribute("aria-hidden", "true");
-          slide.tabIndex = -1;
-        }
-      });
-    },
+    afterChange: (index) => setCurrentSlide(index),
   };
 
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const fetchMovies = genre; // Use the genre function directly
+        const fetchMovies = genre;
         if (!fetchMovies) {
           console.error(`No fetcher found for genre`);
           return;
@@ -73,11 +65,13 @@ const MovieSlider = ({ genre = fetchUpcomingMovies }) => {
       <Slider {...settings}>
         {movies.map((movie) => (
           <div
+            className="card-wrapper"
             key={movie.id}
             draggable="false"
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={() => onMouseUp(movie.id)}>
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={(event) => handleMouseUp(navigate, movie.id)} // Navigate on click
+          >
             <Card src={movie.src} alt={movie.alt} />
           </div>
         ))}

@@ -13,6 +13,12 @@
       .slick-track {
         display: flex;
         gap: 1rem;
+        cursor: pointer;
+
+        .slick-slide {
+          display: flex;
+          gap: 1rem;
+        }
       }
     }
   }
