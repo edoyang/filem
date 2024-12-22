@@ -1,12 +1,12 @@
 import { Link, Route, Routes } from "react-router";
 import "./App.css";
-import "./Responsive.css";
 import Home from "./pages/Home";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Movie from "./pages/Movie";
 import Header from "./components/Header";
 import Login from "./pages/Login";
+import "./Responsive.css";
 
 function App() {
   return (

@@ -6,7 +6,7 @@
   --paragraph: 200 15px/26px "Work Sans", sans-serif;
   --small-text: normal 12px/24px "Work Sans", sans-serif;
   --cast-text: bold 19px/22px "Work Sans", sans-serif;
-  --logo: normal 40px "Bebas Neue", sans-serif;
+  --logo: normal 50px "Bebas Neue", sans-serif;
   --hero-height: 80vh;
   --headline-line-clamp: 1;
   --paragraph-line-clamp: 3;
@@ -14,6 +14,7 @@
   --card-width: 190px;
   --card-height: 300px;
   --global-padding: 2rem;
+  --heaader-position: sticky;
   --backdrop: linear-gradient(
     to right,
     rgba(0, 0, 0, 1) 0%,
@@ -22,6 +23,16 @@
     rgba(0, 0, 0, 0.85) 75%,
     rgba(0, 0, 0, 1) 100%
   );
+  --backdrop-header: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.7) 25%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --login-form-width: 400px;
+  --login-form-height: 500px;
 }
 
 @media (max-width: 850px) {
@@ -33,8 +44,8 @@
     --paragraph: 200 11px/22px "Work Sans", sans-serif;
     --small-text: normal 10px/19px "Work Sans", sans-serif;
     --cast-text: bold 16px/22px "Work Sans", sans-serif;
-    --logo: normal 30px "Bebas Neue", sans-serif;
-    --hero-height: 400px;
+    --logo: normal 40px "Bebas Neue", sans-serif;
+    --hero-height: 450px;
     --headline-line-clamp: 1;
     --paragraph-line-clamp: 3;
     --paragraph-height: 66px;
@@ -60,7 +71,7 @@
     --paragraph: 200 10px/18px "Work Sans", sans-serif;
     --small-text: normal 8px/15px "Work Sans", sans-serif;
     --cast-text: bold 15px/22px "Work Sans", sans-serif;
-    --logo: normal 20px "Bebas Neue", sans-serif;
+    --logo: normal 40px "Bebas Neue", sans-serif;
     --hero-height: 100vh;
     --headline-line-clamp: 2;
     --paragraph-line-clamp: 4;
@@ -68,5 +79,9 @@
     --card-width: 100px;
     --card-height: 150px;
     --global-padding: 1rem;
+    --header-position: relative;
+    --backdrop-header: black;
+    --login-form-width: 100%;
+    --login-form-height: 100%;
   }
 }
