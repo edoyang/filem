@@ -1,6 +1,6 @@
 header {
   display: flex;
-  padding: 0 var(--global-padding);
+  padding: calc(var(--global-padding) / 2) var(--global-padding);
   justify-content: space-between;
   align-items: center;
   position: var(--header-position);

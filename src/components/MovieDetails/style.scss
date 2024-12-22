@@ -53,5 +53,12 @@
         font: var(--cast-text);
       }
     }
+
+    .where-to-watch {
+      .provider-logos {
+        display: flex;
+        gap: calc(var(--global-padding) / 2);
+      }
+    }
   }
 }
