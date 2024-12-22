@@ -34,7 +34,9 @@
     > .movie-info {
       display: flex;
       gap: 1rem;
-      font: bolder 1rem "Work Sans", sans-serif;
+      font: var(--genre-info);
+      white-space: nowrap;
+      overflow: hidden;
 
       > *::after {
         content: "•";

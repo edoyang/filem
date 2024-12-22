@@ -7,6 +7,7 @@
   --small-text: normal 12px/24px "Work Sans", sans-serif;
   --cast-text: bold 19px/22px "Work Sans", sans-serif;
   --logo: normal 50px "Bebas Neue", sans-serif;
+  --genre-info: bolder 1rem "Work Sans", sans-serif;
   --hero-height: 80vh;
   --headline-line-clamp: 1;
   --paragraph-line-clamp: 3;
@@ -14,7 +15,7 @@
   --card-width: 190px;
   --card-height: 300px;
   --global-padding: 2rem;
-  --heaader-position: sticky;
+  --header-position: absolute;
   --backdrop: linear-gradient(
     to right,
     rgba(0, 0, 0, 1) 0%,
@@ -23,8 +24,16 @@
     rgba(0, 0, 0, 0.85) 75%,
     rgba(0, 0, 0, 1) 100%
   );
-  --backdrop-header: linear-gradient(
+  --background-header: linear-gradient(
     to bottom,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.7) 25%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --background-footer: linear-gradient(
+    to top,
     rgba(0, 0, 0, 0.85) 0%,
     rgba(0, 0, 0, 0.7) 25%,
     rgba(0, 0, 0, 0.6) 50%,
@@ -80,8 +89,16 @@
     --card-height: 150px;
     --global-padding: 1rem;
     --header-position: relative;
-    --backdrop-header: black;
+    --background-header: black;
+    --background-footer: black;
     --login-form-width: 100%;
     --login-form-height: 100%;
+    --genre-info: bolder 0.725rem "Work Sans", sans-serif;
+  }
+}
+
+@media (max-width: 330px) {
+  :root {
+    --genre-info: bolder 0.625rem "Work Sans", sans-serif;
   }
 }

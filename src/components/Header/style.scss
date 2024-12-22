@@ -3,7 +3,7 @@ header {
   padding: 0 var(--global-padding);
   justify-content: space-between;
   align-items: center;
-  position: absolute;
+  position: var(--header-position);
   width: 100%;
   z-index: 10;
 
@@ -26,6 +26,17 @@ header {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    background: var(--backdrop-header);
+    background: var(--background-header);
+  }
+
+  .list {
+    > a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: white;
+      background-color: #db202c;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
   }
 }

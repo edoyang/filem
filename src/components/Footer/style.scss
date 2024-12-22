@@ -1,0 +1,9 @@
+footer {
+  background: var(--background-footer);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: calc(var(--global-padding) * 2);
+}

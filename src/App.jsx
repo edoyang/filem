@@ -7,6 +7,7 @@ import Movie from "./pages/Movie";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import "./Responsive.css";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/movie/:id" Component={Movie} />
         </Routes>
       </div>
-      <footer>Footer</footer>
+      <Footer />
     </>
   );
 }
