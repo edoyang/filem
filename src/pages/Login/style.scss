@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  // background: url("/public/bg.jpg");
 
   .login-forms {
     display: flex;
@@ -11,7 +12,7 @@
     gap: var(--global-padding);
     width: var(--login-form-width);
     height: var(--login-form-height);
-    background: #00000060;
+    background: #00000099;
     padding: 2rem;
     justify-content: center;
     align-items: center;

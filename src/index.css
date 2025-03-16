@@ -61,3 +61,64 @@ button:hover {
     background-color: #f9f9f9;
   }
 }
+
+/* Add these to your existing MovieSlider styles.scss */
+
+.movies-slider {
+  /* Keep your existing styles */
+
+  /* Loading skeleton styles */
+  .skeleton-slider {
+    display: flex;
+    padding: 10px;
+    overflow-x: hidden;
+    gap: 10px;
+  }
+
+  .skeleton-card {
+    min-width: 150px;
+    height: 225px;
+    background: linear-gradient(110deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    animation: loading-shine 1.5s infinite;
+    border-radius: 8px;
+  }
+
+  .card-wrapper.loading {
+    .loading-card {
+      min-width: 150px;
+      height: 225px;
+      background: linear-gradient(
+        110deg,
+        #1a1a1a 25%,
+        #2a2a2a 50%,
+        #1a1a1a 75%
+      );
+      background-size: 200% 100%;
+      animation: loading-shine 1.5s infinite;
+      border-radius: 8px;
+    }
+  }
+
+  /* Error state */
+  &.error {
+    .error-message {
+      color: #ff6b6b;
+      padding: 20px;
+      background-color: rgba(255, 0, 0, 0.1);
+      border-radius: 8px;
+      text-align: center;
+      margin: 10px;
+    }
+  }
+}
+
+/* Animation for loading effect */
+@keyframes loading-shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
